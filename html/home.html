@@ -2,225 +2,144 @@
 <html lang="en" ng-app="PetsApp">
 
 <head>
-    <title>Petscare.com</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Petscare.com</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
     <style>
-        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
         }
 
-        .header {
-            background-color: #32CD32;
-            color: white;
-            padding: 50px;
-            text-align: center;
-        }
-
-        .logo-medium {
-            width: 100px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .search-bar-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 50%;
-            margin: 0 auto;
-            padding: 10px;
-        }
-
-        .search-input {
-            width: 60%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        .search-button {
-            padding: 10px 15px;
-            border-radius: 8px;
-            background-color: #32CD32;
-            color: white;
-            border: none;
-        }
-
-        .category-select {
-            width: 15%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        /* Cart Overlay */
-        .cart-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
             background: white;
-            width: 350px;
-            height: 100vh;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
             padding: 20px;
-            overflow-y: auto;
-            z-index: 1000;
-        }
-
-        .subscription-section {
-            background-color: #e0f7e0;
-            padding: 30px;
-            text-align: center;
-            margin: 20px 0;
             border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .cta-button {
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-button {
             background-color: #32CD32;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1.2rem;
+            width: 100%;
+        }
+
+        .login-button:hover {
+            background-color: #28a745;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            margin-top: 15px;
         }
     </style>
 </head>
 
-<body ng-controller="PetsController">
+<body ng-controller="LoginController">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #32CD32;">
-        <a class="navbar-brand" href="#">
-            <img src="PAws.png" alt="Paw Logo" width="40px">
+        <a class="navbar-brand" href="home.html">
+            <img src="dog-paw.png" alt="Paw Logo" width="50">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="subscription.html">Subscription</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" ng-click="toggleCart()">Cart <span class="badge badge-light">{{cart.length}}</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <div class="header text-center">
-        <img src="PAws.png" alt="Dog Paw Logo" class="img-fluid logo-medium">
-        <h1>PETSCARE.COM</h1>
-        <p>Your one-stop shop for pet products and services</p>
-    </div>
-
-    <!-- Search Bar with Category Dropdown -->
-    <div class="search-bar-container">
-        <input type="text" ng-model="searchQuery" class="search-input" placeholder="Search for pet products...">
-        <button class="search-button" ng-click="searchProducts()">Search</button>
-        <select class="form-control category-select" ng-model="selectedCategory" ng-change="filterByCategory()">
-            <option value="">All Categories</option>
-            <option value="Toys">Dog</option>
-            <option value="Food">Cat</option>
-            <option value="Aquarium">Fish</option>
-            <option value="Accessories">Bird</option>
-        </select>
-    </div>
-
-    <!-- Subscription Section -->
-    <div class="subscription-section">
-        <h2>Join Our Subscription!</h2>
-        <p>Get quick delivery and exclusive discounts starting from just ₹99/month!</p>
-        <a href="subscription.html"><button class="cta-button">Subscribe Now</button></a>
-    </div>
-
-    <!-- Product Section -->
-    <div class="container" id="product-section">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 mb-4" ng-repeat="product in filteredProducts">
-                <div class="card product-card">
-                    <img ng-src="{{product.image}}" class="card-img-top" alt="{{product.name}}">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">Price: ${{product.price}}</p>
-                        <button class="btn btn-success" ng-click="addToCart(product)">Add to Cart</button>
-                    </div>
-                </div>
+    <div class="login-container">
+        <h2 class="login-header">Login to Petscare.com</h2>
+        <form ng-submit="loginUser()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" ng-model="credentials.username" required>
             </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" ng-model="credentials.password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+
+        <!-- Alerts -->
+        <div class="alert alert-success" ng-show="successMessage">
+            {{successMessage}}
+        </div>
+        <div class="alert alert-danger" ng-show="errorMessage">
+            {{errorMessage}}
+        </div>
+
+        <div class="footer">
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
         </div>
     </div>
 
-    <!-- Cart Overlay -->
-    <div id="cart-overlay" class="cart-overlay" ng-show="showCart">
-        <h4>Your Cart</h4>
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="item in cart">{{item.name}} - ${{item.price}}</li>
-        </ul>
-        <button class="btn btn-primary btn-block mt-4" ng-click="proceedToBilling()">Proceed to Billing</button>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-center py-4 bg-dark text-white">
-        &copy; 2024 Petscare.com. All Rights Reserved.
-    </footer>
-
+    <!-- AngularJS Controller -->
     <script>
-        // AngularJS App
-        angular.module('PetsApp', []).controller('PetsController', function ($scope) {
-            $scope.allProducts = [
-                { name: "Dog Toy", category: "Toys", price: 10, image: "dog-toy.jpg" },
-                { name: "Cat Food", category: "Food", price: 15, image: "cat-food.jpg" },
-                { name: "Bird Cage", category: "Accessories", price: 25, image: "bird-cage.jpg" },
-                { name: "Fish Tank", category: "Aquarium", price: 50, image: "fish-tank.jpg" },
-                { name: "Rabbit Grooming Kit", category: "Grooming", price: 20, image: "rabbit-grooming-kit.jpg" },
-                { name: "Pet Vitamins", category: "Medicines", price: 12, image: "pet-vitamins.jpg" }
+        angular.module('PetsApp', []).controller('LoginController', function ($scope) {
+            // Login credentials and feedback messages
+            $scope.credentials = {};
+            $scope.successMessage = '';
+            $scope.errorMessage = '';
+
+            // Simulated user data (replace this with actual server-side logic)
+            const userDatabase = [
+                { username: 'testuser', password: 'password123' },
+                { username: 'john', password: 'doe123' }
             ];
-            $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
-            $scope.showCart = false;
-            $scope.filteredProducts = $scope.allProducts;
 
-            $scope.searchProducts = function () {
-                $scope.filteredProducts = $scope.allProducts.filter(product =>
-                    product.name.toLowerCase().includes($scope.searchQuery.toLowerCase())
+            // Login function
+            $scope.loginUser = function () {
+                $scope.successMessage = '';
+                $scope.errorMessage = '';
+
+                const user = userDatabase.find(
+                    u =>
+                        u.username === $scope.credentials.username &&
+                        u.password === $scope.credentials.password
                 );
-            };
 
-            $scope.addToCart = function (product) {
-                $scope.cart.push(product);
-                localStorage.setItem('cart', JSON.stringify($scope.cart));
-            };
+                if (user) {
+                    $scope.successMessage = "Login successful! Redirecting...";
+                    console.log("Logged in User:", user);
 
-            $scope.toggleCart = function () {
-                $scope.showCart = !$scope.showCart;
-            };
-
-            $scope.proceedToBilling = function () {
-                window.location.href = "cart.html";
-            };
-
-            $scope.filterByCategory = function () {
-                if ($scope.selectedCategory) {
-                    $scope.filteredProducts = $scope.allProducts.filter(product =>
-                        product.category === $scope.selectedCategory
-                    );
+                    // Redirect to the homepage or dashboard
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 2000);
                 } else {
-                    $scope.filteredProducts = $scope.allProducts;
+                    $scope.errorMessage = "Invalid username or password. Please try again.";
                 }
             };
-        });
-
-        // JavaScript for Additional Features
-        document.addEventListener('DOMContentLoaded', function () {
-            const searchInput = document.querySelector('.search-input');
-            searchInput.addEventListener('focus', function () {
-                this.style.borderColor = '#32CD32';
-            });
-            searchInput.addEventListener('blur', function () {
-                this.style.borderColor = '#ddd';
-            });
         });
     </script>
 </body>
