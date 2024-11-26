@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="PetsApp">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Petscare.com</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,10 +51,14 @@
         .navbar {
             margin-bottom: 20px;
         }
+
+        .alert {
+            margin-top: 15px;
+        }
     </style>
 </head>
 
-<body>
+<body ng-controller="LoginController">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #32CD32;">
         <a class="navbar-brand" href="home.html">
@@ -71,38 +78,69 @@
 
     <div class="login-container">
         <h2 class="login-header">Login to Petscare.com</h2>
-        <form id="loginForm" onsubmit="return handleLogin(event)">
+        <form ng-submit="loginUser()">
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" required>
+                <input type="text" class="form-control" id="username" ng-model="credentials.username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" required>
+                <input type="password" class="form-control" id="password" ng-model="credentials.password" required>
             </div>
             <button type="submit" class="login-button">Login</button>
         </form>
+
+        <!-- Alerts -->
+        <div class="alert alert-success" ng-show="successMessage">
+            {{successMessage}}
+        </div>
+        <div class="alert alert-danger" ng-show="errorMessage">
+            {{errorMessage}}
+        </div>
+
         <div class="footer">
             <p>Don't have an account? <a href="register.html">Register here</a></p>
         </div>
     </div>
 
+    <!-- AngularJS Controller -->
     <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        angular.module('PetsApp', []).controller('LoginController', function ($scope) {
+            // Login credentials and feedback messages
+            $scope.credentials = {};
+            $scope.successMessage = '';
+            $scope.errorMessage = '';
 
-            // Here you would typically send the login data to the server
-            // For now, we will just simulate a login success
-            if (username && password) {
-                alert("Login successful! Welcome, " + username + "!");
-                // Redirect to the homepage or another page
-                window.location.href = 'home.html'; // Change this to your homepage or dashboard
-            } else {
-                alert("Please fill in all fields.");
-            }
-        }
+            // Simulated user data (replace this with actual server-side logic)
+            const userDatabase = [
+                { username: 'testuser', password: 'password123' },
+                { username: 'john', password: 'doe123' }
+            ];
+
+            // Login function
+            $scope.loginUser = function () {
+                $scope.successMessage = '';
+                $scope.errorMessage = '';
+
+                const user = userDatabase.find(
+                    u =>
+                        u.username === $scope.credentials.username &&
+                        u.password === $scope.credentials.password
+                );
+
+                if (user) {
+                    $scope.successMessage = "Login successful! Redirecting...";
+                    console.log("Logged in User:", user);
+
+                    // Redirect to the homepage or dashboard
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 2000);
+                } else {
+                    $scope.errorMessage = "Invalid username or password. Please try again.";
+                }
+            };
+        });
     </script>
 </body>
 
