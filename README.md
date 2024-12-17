@@ -1,99 +1,102 @@
+# Pets-Care-Management-System
+This project is Pet Shop Management System; it is written in Java and connected to the Apache Derby database for storing and retrieving information. It is designed with many interfaces made by the NetBeans API. This system serves three types of users, which are: (Admin, Employee, and Customer). Each type of user has its own interfaces and functionalities.
 
-# PetsCare.com - README
+<br>
+Note: All system details are in the pdf file attached in repository files.
 
-Welcome to **PetsCare.com**, a platform dedicated to helping pet owners find trusted advice, services, and products to take better care of their furry (or scaly!) friends. This README file provides an overview of PetsCare.com, how to navigate it, and details on contributing and support.
+# 📋 Requirements
+* Configure The Derby Database in java
+* Add JAR Files (you will find them in the repository files)
 
----
 
-## Table of Contents
-1. [About PetsCare.com](#about-petscarecom)
-2. [Features](#features)
-3. [Installation and Setup](#installation-and-setup)
-4. [Usage](#usage)
-5. [Contributing](#contributing)
-6. [Support and Contact](#support-and-contact)
-7. [License](#license)
+# ⚙️ The Basic Functionalities
+All IDs Field is filled automatically
 
----
+## 👨🏻‍💻 Admin: 
+* Manage Employee 
+* Manage Pets 
+* Manage Food 
+* Manage Supplies
 
-## About PetsCare.com
 
-PetsCare.com is a comprehensive online resource designed to meet the needs of pet owners. We offer expert advice, reviews, and recommendations for pet care products and services. Our mission is to provide a one-stop solution where pet owners can learn how to give their pets the best care possible.
+**Note:**
+* The admin has the ability to add, edit, and remove information on the records.
+* All Information is retrieved from the database, and any changes will reflect on it.
+* While editing, adding, or removing products the changes will reflect automatically on the products menu.
 
----
 
-## Features
+## 👨🏻‍💼 Employee: 
+* Manage Customers
+* Manage Orders
 
-- **Pet Care Articles**: Expert advice on nutrition, grooming, health, and more for various pet species.
-- **Product Reviews**: Honest reviews of pet supplies, food, toys, and more to help you make informed purchases.
-- **Vet Finder**: Locate qualified veterinarians near you for emergencies or regular check-ups.
-- **Community Forum**: Connect with other pet lovers, share experiences, and ask questions.
-- **User Profiles**: Personalize your experience by creating a profile with your pet's information.
-- **Newsletter Subscription**: Stay up-to-date on the latest pet care trends, tips, and promotions.
+**Note:**
+<br>
+* The employee has the ability to add, edit, and remove information on the records.
+* All Information is retrieved from the database, and any changes will reflect on it.
+* For manage order, specific customer ID can be searched to facilitate the search process.
 
----
+## 👥 Customer: 
+* Sign-up to The System
+* Log-in to The System
+* View The Menu
+  * If The Product is Out of Stock, Will Not Show in The Menu
+* Read About The Shop's Information or Watch a Video
+* Add and Edit to The Cart
+  *  If Customer try to buy more than available stock, adding process will reject
+* Receive An Email With The Order Information
+* View The Bill
+* Print PDF Bill
+* Rate The Shop Services
 
-## Installation and Setup
+# 📷 Screenshots
+## Login Interface
+![1](https://user-images.githubusercontent.com/126514202/222896958-f1caa096-ac66-4d54-b03a-4a9f180464e2.png)
 
-1. **Clone the repository** (for developers):
-   ```bash
-   git clone https://github.com/yourusername/petscare.com.git
-   cd petscare.com
-   ```
+##  Customer Sign Up Interface
+![2](https://user-images.githubusercontent.com/126514202/222896961-a064e7d9-1c55-4d36-9b02-8128d6c6320a.png)
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+## Admin Interface
+![3](https://user-images.githubusercontent.com/126514202/222896963-a02d110d-ce34-40a1-9784-6a95c5a3ccfe.jpeg)
 
-3. **Start the development server**:
-   ```bash
-   npm start
-   ```
+## Manage Pet Interface for Admin
+![4](https://user-images.githubusercontent.com/126514202/222896964-3cf0062b-6ce1-4767-9549-ee9e89713b61.png)
 
-4. **Access the site**:
-   Open your browser and go to `http://localhost:3000`.
+## Employee Interface
+![5](https://user-images.githubusercontent.com/126514202/222896966-2a761538-3065-4b28-ab55-c1a39db6fbb5.png)
 
-> **Note**: This setup assumes a development environment. For deployment, please refer to the documentation provided.
+##  Customer Interface
+![6](https://user-images.githubusercontent.com/126514202/222896967-262ca4bf-a010-4679-90ee-8108f758be68.jpeg)
 
----
+## Information About Us Interface
+![7](https://user-images.githubusercontent.com/126514202/222896968-0ed4d470-8db3-4378-9a43-fa6f5df7f07e.jpeg)
 
-## Usage
+##  Interface to choose Pet Type
+![8](https://user-images.githubusercontent.com/126514202/222896969-17cfb468-58c1-4851-a8ae-b5140a4d0754.png)
 
-1. **Create an Account**: Sign up for a free account to access personalized features and save preferences.
-2. **Browse Articles and Reviews**: Navigate through our content to find valuable information on pet care.
-3. **Find a Vet**: Use our search tool to locate nearby veterinarians.
-4. **Join the Community**: Engage in forums to learn, share, and connect with other pet owners.
-5. **Subscribe to Newsletter**: Get regular updates and stay informed about pet care.
+## Cat Store Interface
+![9](https://user-images.githubusercontent.com/126514202/222896970-d843ae6b-0867-433e-89c0-847afef45d8f.jpeg)
 
----
+##  Interface to choose Pet Food Type
+![10](https://user-images.githubusercontent.com/126514202/222896971-18f207b9-f69a-4cee-86f6-e7c9dbc45f09.png)
 
-## Contributing
+##  Wet Food Store Interface
+![11](https://user-images.githubusercontent.com/126514202/222896972-e667a718-b4de-4524-91ba-04891881915c.png)
 
-We welcome contributions from the community! Here’s how you can contribute:
+## Supplies Store Interface
+![12](https://user-images.githubusercontent.com/126514202/222896973-659146f3-067e-4969-8fd2-16eb1aa27282.png)
 
-1. **Fork the Repository**: Create your own copy of the repository.
-2. **Make Changes**: Update the code, fix bugs, or add features.
-3. **Submit a Pull Request**: Share your improvements for review.
+## Cart Interface
+![13](https://user-images.githubusercontent.com/126514202/222896974-45be6552-da29-43bc-8b0f-766a794fcd89.png)
 
-For more detailed information on contributing, refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+##  Email send to customer after he checkout
+![3](https://user-images.githubusercontent.com/126514202/222897315-5964f1d2-b04a-4c47-ab89-66df258792f8.jpeg)
 
----
+##  Order Information Interface
+![15](https://user-images.githubusercontent.com/126514202/222896978-13c6c902-5f2b-44cf-b474-2aa96cf7e674.png)
 
-## Support and Contact
+## PDF Bill File
+![16](https://user-images.githubusercontent.com/126514202/222896979-bf654f99-98a5-40c6-877c-f2ac0099cdc2.jpeg)
 
-If you have any questions, issues, or feedback, please reach out to our support team:
+## Interface to Rate our Services
+![17](https://user-images.githubusercontent.com/126514202/222896980-69c24415-9507-4fdc-9eed-7f0d40627226.jpeg)
 
-- **Email**: support@petscare.com
-- **Community Forum**: [PetsCare Community](https://petscare.com/community)
-- **FAQ**: Check our [FAQ page](https://petscare.com/faq) for common questions.
-
----
-
-## License
-
-PetsCare.com is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Thank you for being a part of the PetsCare community! 🐾
