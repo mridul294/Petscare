@@ -1,0 +1,28 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="3.1">
+    <servlet>
+        <servlet-name>ListPetsServlet</servlet-name>
+        <servlet-class>com.example.ListPetsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListPetsServlet</servlet-name>
+        <url-pattern>/listPets</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddPetServlet</servlet-name>
+        <servlet-class>com.example.AddPetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddPetServlet</servlet-name>
+        <url-pattern>/addPet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeletePetServlet</servlet-name>
+        <servlet-class>com.example.DeletePetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeletePetServlet</servlet-name>
+        <url-pattern>/deletePet</url-pattern>
+    </servlet-mapping>
+</web-app>
